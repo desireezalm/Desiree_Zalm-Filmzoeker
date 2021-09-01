@@ -1,4 +1,9 @@
-const movies = [
+// EXPORT
+
+// export { movies };
+
+
+export const movies = [
 
     {
     
@@ -561,4 +566,6 @@ const movies = [
     }
     
     ];
+    
+    
     
