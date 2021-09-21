@@ -2,7 +2,7 @@
 
 // IMPORT
 import { movies } from './movies.js';
-
+// console.log(movies);
 
 
 // GET MOVIE TITLES
@@ -24,27 +24,11 @@ let moviePoster = movies.map ((movie) => {
 
 const movieList = document.getElementById("movieDatabase");
 
-/*
-const addMoviesToDom = () => {
-    for(let i=0; i<moviePoster.length; i++) {
-        let entry = moviePoster[i];
-        let entryTitle = document.createElement("li");
-        entryTitle.classList.add("entryMovie");
-        let entryPoster = document.createElement("img");
-        entryPoster.src = entry; 
-        movieList.appendChild(entryTitle);
-        entryTitle.appendChild(entryPoster);
-    };
-};
-addMoviesToDom();
-*/
-
 const addMoviesToDom = (array, element) => {
     array.forEach(movie => {
         
         let movieItem = document.createElement('li');
         let entryPoster = document.createElement("img");
-        // movieItem.innerHTML = movie.Title;
         entryPoster.src = movie.Poster;
         movieItem.classList.add("entryMovie");        
         element.appendChild(movieItem);
@@ -53,6 +37,9 @@ const addMoviesToDom = (array, element) => {
     });
 };
 addMoviesToDom(movies, movieList);
+
+
+// REMOVE MOVIES FROM DOM
 
 const removeMoviesFromDom = () => {
     while (movieList.firstChild) {
@@ -63,46 +50,94 @@ const removeMoviesFromDom = () => {
 
 // FILTER MOVIES
 
+// INCOMPLEET, OP ANDERE MANIER PROBEREN?
 /*
-const filterMovies = (wordInMovieTitle) => {
-    movies.filter(function (stringTitle) {
-        return stringTitle.includes(wordInMovieTitle);
-    });
-    console.log(filterMovies);
-    return filterMovies;
-};
-filterMovies();
-*/
-
-/*
-let filteredMovies = movies.filter(function(movie, wordInMovieTitle) {
+let filterMovies = movies.filter(function(movie, wordInMovieTitle) {    
     return movie.Title.includes(wordInMovieTitle);
 });
-console.log(filteredMovies);
+console.log(filterMovies);
 */
 
-let avengerMovies = movies.filter(function(movie) {
+
+// WERKT NIET, GEEFT LEGE ARRAY.
+/*
+const filterMovies = movies.filter((movie) => {
+    switch(document.getElementById) {
+    case "avenger":
+        return movie.Title.includes("Avengers");
+    case "xmen":
+        return movie.Title.includes("X-Men");
+    case "princess":
+        return movie.Title.includes("Princess");
+    case "batman":
+        return movie.Title.includes("Batman");
+    }   
+});
+*/
+
+// WERKT NIET, GEEFT ALLEEN AVENGER FILMS WEER IN ARRAY.
+/*
+const filterMovies = movies.filter((movie) => {
+    if(document.getElementById = "avenger") {
+        return movie.Title.includes("Avengers");
+    }
+    else if(document.getElementById = "xmen") {
+        return movie.Title.includes("X-Men");
+    }
+    else if(document.getElementById = "princess") {
+        return movie.Title.includes("Princess");
+    }
+    else if(document.getElementById = "batman") {
+        return movie.Title.includes("Batman");
+    }
+    // return movie.Title.includes(wordInMovieTitle);    
+});
+*/
+
+// WERKT NIET, GEEFT ALLEEN AVENGER FILMS WEER IN ARRAY.
+const filterMovies = movies.filter((movie, wordInMovieTitle) => {
+    if(document.getElementById = "avenger") {
+        wordInMovieTitle = "Avengers";
+    }
+    else if(document.getElementById = "xmen") {
+        wordInMovieTitle = "Avengers";
+    }
+    else if(document.getElementById = "princess") {
+        wordInMovieTitle = "Avengers";
+    }
+    else if(document.getElementById = "batman") {
+        wordInMovieTitle = "Avengers";
+    }
+    return movie.Title.includes(wordInMovieTitle);    
+});
+
+
+let newMovies = movies.filter((movie) => movie.Year >= 2014);
+
+
+// AFZONDERLIJKE FUNCTIES WERKEN, MAAR MOET IN EEN FUNCTIE GECOMBINEERD WORDEN.
+/*
+let avengerMovies = movies.filter((movie) => {
     return movie.Title.includes("Avengers");
 });
 
-let xMenMovies = movies.filter(function(movie) {
+let xMenMovies = movies.filter((movie) => {
     return movie.Title.includes("X-Men");
 });
 
-let princessMovies = movies.filter(function(movie) {
+let princessMovies = movies.filter((movie) => {
     return movie.Title.includes("Princess");
 });
 
-let batmanMovies = movies.filter(function(movie) {
+let batmanMovies = movies.filter((movie) => {
     return movie.Title.includes("Batman");
 });
+*/
 
 
 // SELECT RADIOBUTTONS
 
 const filterBtns = document.getElementsByName("film");
-// console.log(filterBtns);
-
 
 const changeEvent = () => {
     for (let i=0; i<filterBtns.length; i++) {
@@ -112,36 +147,34 @@ const changeEvent = () => {
             // console.log(e.target);
             switch (e.target.id) {
                 case "nieuw":
-                    console.log("Dit zijn nieuwe films");
                     console.log(e.target.value);
+                    console.log(newMovies);
+                    removeMoviesFromDom();
+                    addMoviesToDom(newMovies, movieList);
                     break;
                 case "avenger":
                     console.log(e.target.value);
-                    console.log(avengerMovies);
+                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(avengerMovies, movieList);
-                    document.getElementById("avenger").checked = true;
+                    addMoviesToDom(filterMovies, movieList);
                     break;
                 case "xmen":
                     console.log(e.target.value);
-                    console.log(xMenMovies);
+                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(xMenMovies, movieList);
-                    document.getElementById("xmen").checked = true;
+                    addMoviesToDom(filterMovies, movieList);
                     break;
                 case "princess":
                     console.log(e.target.value);
-                    console.log(princessMovies);
+                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(princessMovies, movieList);
-                    document.getElementById("princess").checked = true;
+                    addMoviesToDom(filterMovies, movieList);
                     break;
                 case "batman":
                     console.log(e.target.value);
-                    console.log(batmanMovies);
+                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(batmanMovies, movieList);
-                    document.getElementById("batman").checked = true;
+                    addMoviesToDom(filterMovies, movieList);
                     break;
             }
         });
