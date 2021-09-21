@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+body {
+  width: 95%;
+  font-family: Ubuntu, Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1em;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-left: 1px;
+  border-right: 1px;
+  border-style: solid;
+  border-radius: 25px;
+  border-color: #333;
+  margin-top: 50px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h1 {
+  margin-bottom: 0px;
+}
+
+p {
+  font-size: 0.7em;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+nav {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* MEDIA QUERIES */
+
+/* MOBILE*/
+@media (max-width: 768px) {
+}
+
+/*DESKTOP*/
+@media (min-width: 1024px) {
+}

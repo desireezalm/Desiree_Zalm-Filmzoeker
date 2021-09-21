@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Filmzoeker</title>
+        <script defer type="module" src="./JS/movies.js"></script>
+        <script defer type="module" src="./JS/script.js"></script>
+        <link rel="stylesheet" href="./CSS/style.css">
+    </head>
+    <body>
+        <header>
+            <h1>FILMZOEKER</h1> 
+            <p>By Desirée Zalm</p>
+        </header>
+        <nav id="nav">
+            <div>
+                <input type="radio" id="nieuw" name="film" value="nieuw">
+                <label for="nieuw">Laatste films, 2014 of nieuwer</label>
+            </div>
+                  
+            <div>
+                <input type="radio" id="avenger" name="film" value="avenger">
+                <label for="avenger">Avenger films</label>
+            </div>
+                  
+            <div>
+                <input type="radio" id="xmen" name="film" value="xmen">
+                <label for="xmen">X-Men films</label>
+            </div>
+
+            <div>
+                <input type="radio" id="princess" name="film" value="princess">
+                <label for="princess">Princess films</label>
+            </div>
+
+            <div>
+                <input type="radio" id="batman" name="film" value="batman">
+                <label for="batman">Batman films</label>
+            </div>
+        </nav>
+        
+        <main>
+            <div class="container">
+                <ul id="movieDatabase">
+
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <h3>LINKS:</h3>
+            <ul id="menu-footer">
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </footer>      
+    </body>
+</html>
+
+
