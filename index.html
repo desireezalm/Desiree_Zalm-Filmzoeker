@@ -13,33 +13,47 @@
             <h1>FILMZOEKER</h1> 
             <p>By Desirée Zalm</p>
         </header>
-        <nav id="nav">
-            <div>
-                <input type="radio" id="nieuw" name="film" value="nieuw">
-                <label for="nieuw">Laatste films, 2014 of nieuwer</label>
-            </div>
-                  
-            <div>
-                <input type="radio" id="avenger" name="film" value="avenger">
-                <label for="avenger">Avenger films</label>
-            </div>
-                  
-            <div>
-                <input type="radio" id="xmen" name="film" value="xmen">
-                <label for="xmen">X-Men films</label>
-            </div>
+        <div class="inputContainer">
+            <nav id="nav">
+                <div class="movieButton">
+                    <input type="radio" id="nieuw" name="film" value="nieuw">
+                    <label for="nieuw">Laatste films, 2014 of nieuwer</label>
+                </div>
+                    
+                <div class="movieButton">
+                    <input type="radio" id="avenger" name="film" value="avenger">
+                    <label for="avenger">Avenger films</label>
+                </div>
+                    
+                <div class="movieButton">
+                    <input type="radio" id="xmen" name="film" value="xmen">
+                    <label for="xmen">X-Men films</label>
+                </div>
 
-            <div>
-                <input type="radio" id="princess" name="film" value="princess">
-                <label for="princess">Princess films</label>
-            </div>
+                <div class="movieButton">
+                    <input type="radio" id="princess" name="film" value="princess">
+                    <label for="princess">Princess films</label>
+                </div>
 
-            <div>
-                <input type="radio" id="batman" name="film" value="batman">
-                <label for="batman">Batman films</label>
+                <div class="movieButton">
+                    <input type="radio" id="batman" name="film" value="batman">
+                    <label for="batman">Batman films</label>
+                </div>
+            </nav>
+
+            <form id="search-movies">
+                <input 
+                    type="text" 
+                    name="searchBar"
+                    id="searchBar" 
+                    placeholder="Search for movies..."/>
+            </form>
+
+            <div id="refresh">
+                <button type="button" id="refreshButton">Clear selection</button>
             </div>
-        </nav>
-        
+        </div>
+
         <main>
             <div class="container">
                 <ul id="movieDatabase">
