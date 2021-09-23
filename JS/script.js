@@ -18,6 +18,21 @@ let moviePoster = movies.map ((movie) => {
 });
 // console.log(moviePoster);
 
+// GET IMDB ID'S
+let imdbLink = movies.map ((movie) => {
+    return movie.imdbID;
+});
+// console.log(imdbLink);
+
+// ADD LINKS TO POSTERS
+let getLinks = (movies) => {
+    movies.forEach(movie => {
+        let fullLink = `https://www.imdb.com/title/${movie.imdbID}/`;
+        console.log(fullLink);
+    });
+};
+// getLinks(movies);
+
 
 
 // ADD MOVIES TO DOM
@@ -29,10 +44,14 @@ const addMoviesToDom = (array, element) => {
         
         let movieItem = document.createElement('li');
         let entryPoster = document.createElement("img");
+        let movieLink = document.createElement('a');
+        let fullLink = `https://www.imdb.com/title/${movie.imdbID}/`;
         entryPoster.src = movie.Poster;
-        movieItem.classList.add("entryMovie");        
+        movieLink.href = fullLink;
+        movieLink.target= "_blank";       
         element.appendChild(movieItem);
-        movieItem.appendChild(entryPoster);
+        movieItem.appendChild(movieLink);
+        movieLink.appendChild(entryPoster);
 
     });
 };
@@ -95,6 +114,7 @@ const filterMovies = movies.filter((movie) => {
 */
 
 // WERKT NIET, GEEFT ALLEEN AVENGER FILMS WEER IN ARRAY.
+/*
 const filterMovies = movies.filter((movie, wordInMovieTitle) => {
     if(document.getElementById = "avenger") {
         wordInMovieTitle = "Avengers";
@@ -110,6 +130,17 @@ const filterMovies = movies.filter((movie, wordInMovieTitle) => {
     }
     return movie.Title.includes(wordInMovieTitle);    
 });
+*/
+
+
+// UITPROBEREN
+
+const filterMovies = (wordInMovieTitle) => {
+    const filteredMovies = movies.filter((movie) => movie.Title.includes(wordInMovieTitle));
+    console.log(filteredMovies)
+    return filteredMovies;
+};
+
 
 
 let newMovies = movies.filter((movie) => movie.Year >= 2014);
@@ -154,27 +185,27 @@ const changeEvent = () => {
                     break;
                 case "avenger":
                     console.log(e.target.value);
-                    console.log(filterMovies);
+                    console.log(filterMovies("Avengers"));
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Avengers"), movieList);
                     break;
                 case "xmen":
                     console.log(e.target.value);
-                    console.log(filterMovies);
+                    console.log(filterMovies("X-Men"));
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("X-Men"), movieList);
                     break;
                 case "princess":
                     console.log(e.target.value);
-                    console.log(filterMovies);
+                    console.log(filterMovies("Princess"));
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Princess"), movieList);
                     break;
                 case "batman":
                     console.log(e.target.value);
-                    console.log(filterMovies);
+                    console.log(filterMovies("Batman"));
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Batman"), movieList);
                     break;
             }
         });
