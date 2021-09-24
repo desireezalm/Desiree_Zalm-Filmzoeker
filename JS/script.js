@@ -9,20 +9,18 @@ import { movies } from './movies.js';
 let movieTitles = movies.map ((movie) => {
     return movie.Title;
 });
-// console.log(movieTitles);
 
 
 // GET MOVIE POSTERS
 let moviePoster = movies.map ((movie) => {
     return movie.Poster;
 });
-// console.log(moviePoster);
+
 
 // GET IMDB ID'S
 let imdbLink = movies.map ((movie) => {
     return movie.imdbID;
 });
-// console.log(imdbLink);
 
 // ADD LINKS TO POSTERS
 let getLinks = (movies) => {
@@ -31,12 +29,11 @@ let getLinks = (movies) => {
         console.log(fullLink);
     });
 };
-// getLinks(movies);
 
 
 // ADD MOVIES TO DOM
 
-const movieList = document.getElementById("movieDatabase");
+const movieList = document.getElementById("movie-database");
 
 const addMoviesToDom = (array, element) => {
     array.forEach(movie => {
@@ -106,36 +103,29 @@ const changeEvent = () => {
     for (let i=0; i<filterBtns.length; i++) {
         filterBtns[i].addEventListener("change", function(e) {
             let btn = filterBtns[i];
-            // console.log(btn.value);
-            // console.log(e.target);
             switch (e.target.id) {
                 case "nieuw":
                     console.log(e.target.value);
-                    console.log(newMovies);
                     removeMoviesFromDom();
                     addMoviesToDom(newMovies, movieList);
                     break;
                 case "avenger":
                     console.log(e.target.value);
-                    console.log(filterMovies("Avengers"));
                     removeMoviesFromDom();
                     addMoviesToDom(filterMovies("Avengers"), movieList);
                     break;
                 case "xmen":
                     console.log(e.target.value);
-                    console.log(filterMovies("X-Men"));
                     removeMoviesFromDom();
                     addMoviesToDom(filterMovies("X-Men"), movieList);
                     break;
                 case "princess":
                     console.log(e.target.value);
-                    console.log(filterMovies("Princess"));
                     removeMoviesFromDom();
                     addMoviesToDom(filterMovies("Princess"), movieList);
                     break;
                 case "batman":
                     console.log(e.target.value);
-                    console.log(filterMovies("Batman"));
                     removeMoviesFromDom();
                     addMoviesToDom(filterMovies("Batman"), movieList);
                     break;
@@ -150,8 +140,6 @@ changeEvent();
 
 const searchBar = document.forms['search-movies'].querySelector('input');
 
-
-
 searchBar.addEventListener('keyup', (e) => {
     let searchTerm = e.target.value.toLowerCase();
     let filteredTitles = movies.filter(movie => {
@@ -161,51 +149,17 @@ searchBar.addEventListener('keyup', (e) => {
     removeMoviesFromDom();
     addMoviesToDom(filteredTitles, movieList);
 });
-console.log(searchBar);
+// console.log(searchBar);
 
 
 // REFRESH BUTTON
-const refreshBtn = document.getElementById(refreshButton);
-/*
-const changeEvent = () => {
-    for (let i=0; i<filterBtns.length; i++) {
-        filterBtns[i].addEventListener("change", function(e) {
-            let btn = filterBtns[i];
-            // console.log(btn.value);
-            // console.log(e.target);
-            switch (e.target.id) {
-                case "nieuw":
-                    console.log(e.target.value);
-                    console.log(newMovies);
-                    removeMoviesFromDom();
-                    addMoviesToDom(newMovies, movieList);
-                    break;
-                case "avenger":
-                    console.log(e.target.value);
-                    console.log(filterMovies("Avengers"));
-                    removeMoviesFromDom();
-                    addMoviesToDom(filterMovies("Avengers"), movieList);
-                    break;
-                case "xmen":
-                    console.log(e.target.value);
-                    console.log(filterMovies("X-Men"));
-                    removeMoviesFromDom();
-                    addMoviesToDom(filterMovies("X-Men"), movieList);
-                    break;
-                case "princess":
-                    console.log(e.target.value);
-                    console.log(filterMovies("Princess"));
-                    removeMoviesFromDom();
-                    addMoviesToDom(filterMovies("Princess"), movieList);
-                    break;
-                case "batman":
-                    console.log(e.target.value);
-                    console.log(filterMovies("Batman"));
-                    removeMoviesFromDom();
-                    addMoviesToDom(filterMovies("Batman"), movieList);
-                    break;
-            }
-        });
+const refreshBtn = document.getElementById("refresh-button");
+
+refreshBtn.addEventListener("click", function(e) {
+    let clearBtns = document.getElementsByName("film");
+    for(let i=0;i<clearBtns.length;i++) {
+        clearBtns[i].checked = false;
+        removeMoviesFromDom();
+        addMoviesToDom(movies, movieList);
     };
-};
-changeEvent();*/
+});
