@@ -9,30 +9,46 @@ import { movies } from './movies.js';
 let movieTitles = movies.map ((movie) => {
     return movie.Title;
 });
-// console.log(movieTitles);
 
 
 // GET MOVIE POSTERS
 let moviePoster = movies.map ((movie) => {
     return movie.Poster;
 });
-// console.log(moviePoster);
 
+
+// GET IMDB ID'S
+let imdbLink = movies.map ((movie) => {
+    return movie.imdbID;
+});
+
+// ADD LINKS TO POSTERS
+let getLinks = (movies) => {
+    movies.forEach(movie => {
+        let fullLink = `https://www.imdb.com/title/${movie.imdbID}/`;
+        console.log(fullLink);
+    });
+};
 
 
 // ADD MOVIES TO DOM
 
-const movieList = document.getElementById("movieDatabase");
+const movieList = document.getElementById("movie-database");
 
 const addMoviesToDom = (array, element) => {
     array.forEach(movie => {
         
         let movieItem = document.createElement('li');
-        let entryPoster = document.createElement("img");
+        let entryPoster = document.createElement('img');
+        let movieLink = document.createElement('a');
+        let fullLink = `https://www.imdb.com/title/${movie.imdbID}/`;
         entryPoster.src = movie.Poster;
-        movieItem.classList.add("entryMovie");        
+        movieLink.href = fullLink;
+        movieLink.target = "_blank";
+        movieLink.title = movie.Title;      
         element.appendChild(movieItem);
-        movieItem.appendChild(entryPoster);
+        movieItem.appendChild(movieLink);
+        movieLink.appendChild(entryPoster);
 
     });
 };
@@ -50,72 +66,16 @@ const removeMoviesFromDom = () => {
 
 // FILTER MOVIES
 
-// INCOMPLEET, OP ANDERE MANIER PROBEREN?
-/*
-let filterMovies = movies.filter(function(movie, wordInMovieTitle) {    
-    return movie.Title.includes(wordInMovieTitle);
-});
-console.log(filterMovies);
-*/
-
-
-// WERKT NIET, GEEFT LEGE ARRAY.
-/*
-const filterMovies = movies.filter((movie) => {
-    switch(document.getElementById) {
-    case "avenger":
-        return movie.Title.includes("Avengers");
-    case "xmen":
-        return movie.Title.includes("X-Men");
-    case "princess":
-        return movie.Title.includes("Princess");
-    case "batman":
-        return movie.Title.includes("Batman");
-    }   
-});
-*/
-
-// WERKT NIET, GEEFT ALLEEN AVENGER FILMS WEER IN ARRAY.
-/*
-const filterMovies = movies.filter((movie) => {
-    if(document.getElementById = "avenger") {
-        return movie.Title.includes("Avengers");
-    }
-    else if(document.getElementById = "xmen") {
-        return movie.Title.includes("X-Men");
-    }
-    else if(document.getElementById = "princess") {
-        return movie.Title.includes("Princess");
-    }
-    else if(document.getElementById = "batman") {
-        return movie.Title.includes("Batman");
-    }
-    // return movie.Title.includes(wordInMovieTitle);    
-});
-*/
-
-// WERKT NIET, GEEFT ALLEEN AVENGER FILMS WEER IN ARRAY.
-const filterMovies = movies.filter((movie, wordInMovieTitle) => {
-    if(document.getElementById = "avenger") {
-        wordInMovieTitle = "Avengers";
-    }
-    else if(document.getElementById = "xmen") {
-        wordInMovieTitle = "Avengers";
-    }
-    else if(document.getElementById = "princess") {
-        wordInMovieTitle = "Avengers";
-    }
-    else if(document.getElementById = "batman") {
-        wordInMovieTitle = "Avengers";
-    }
-    return movie.Title.includes(wordInMovieTitle);    
-});
-
+const filterMovies = (wordInMovieTitle) => {
+    const filteredMovies = movies.filter((movie) => movie.Title.includes(wordInMovieTitle));
+    console.log(filteredMovies)
+    return filteredMovies;
+};
 
 let newMovies = movies.filter((movie) => movie.Year >= 2014);
 
 
-// AFZONDERLIJKE FUNCTIES WERKEN, MAAR MOET IN EEN FUNCTIE GECOMBINEERD WORDEN.
+// AFZONDERLIJKE FUNCTIES VOOR TESTEN
 /*
 let avengerMovies = movies.filter((movie) => {
     return movie.Title.includes("Avengers");
@@ -143,41 +103,63 @@ const changeEvent = () => {
     for (let i=0; i<filterBtns.length; i++) {
         filterBtns[i].addEventListener("change", function(e) {
             let btn = filterBtns[i];
-            // console.log(btn.value);
-            // console.log(e.target);
             switch (e.target.id) {
                 case "nieuw":
                     console.log(e.target.value);
-                    console.log(newMovies);
                     removeMoviesFromDom();
                     addMoviesToDom(newMovies, movieList);
                     break;
                 case "avenger":
                     console.log(e.target.value);
-                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Avengers"), movieList);
                     break;
                 case "xmen":
                     console.log(e.target.value);
-                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("X-Men"), movieList);
                     break;
                 case "princess":
                     console.log(e.target.value);
-                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Princess"), movieList);
                     break;
                 case "batman":
                     console.log(e.target.value);
-                    console.log(filterMovies);
                     removeMoviesFromDom();
-                    addMoviesToDom(filterMovies, movieList);
+                    addMoviesToDom(filterMovies("Batman"), movieList);
                     break;
             }
         });
     };
 };
 changeEvent();
+
+
+// SEARCH BAR
+
+const searchBar = document.forms['search-movies'].querySelector('input');
+
+searchBar.addEventListener('keyup', (e) => {
+    let searchTerm = e.target.value.toLowerCase();
+    let filteredTitles = movies.filter(movie => {
+        return movie.Title.toLowerCase().includes(searchTerm)
+    });
+    console.log(filteredTitles);
+    removeMoviesFromDom();
+    addMoviesToDom(filteredTitles, movieList);
+});
+// console.log(searchBar);
+
+
+// REFRESH BUTTON
+const refreshBtn = document.getElementById("refresh-button");
+
+refreshBtn.addEventListener("click", function(e) {
+    let clearBtns = document.getElementsByName("film");
+    for(let i=0;i<clearBtns.length;i++) {
+        clearBtns[i].checked = false;
+        removeMoviesFromDom();
+        addMoviesToDom(movies, movieList);
+    };
+});
